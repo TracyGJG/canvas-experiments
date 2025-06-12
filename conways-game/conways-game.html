@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conway's Game</title>
+</head>
+
+<body>
+    <h1>Conway&apos;s Game</h1>
+    <h2>Rules <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules">Ref.</a></h2>
+    <ul>
+        <li>Any live cell with two or three living neighbours survives (stays alive.)</li>
+        <li>Any dead cell with three live neighbours becomes a live cell (comes back to life.)</li>
+        <li>All other live cells die in the next generation. Similarly, all dead cells stay dead.</li>
+    </ul>
+    <h3>There is a lovely video on <a href="https://youtu.be/C2vgICfQawE">YouTube</a></h3>
+
+    <h2>Index</h2>
+    <ol>
+        <li><a href="conway-random.html">Random</a></li>
+        <li><a href="conway-statics.html">Statics</a></li>
+        <li><a href="conway-oscillators.html">Oscillators</a></li>
+        <li><a href="conway-gliders.html">Gilders</a></li>
+        <li><a href="conway-spaceships.html">Spaceships</a></li>
+        <li><a href="conway-glider-guns.html">Gliders Gun</a></li>
+        <li><a href="conway-butterflies.html">Butterflies</a></li>
+    </ol>
+    <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns">Example Patterns</a>
+
+    <h2>Source Code</h2>
+    <h3>conway-canvas</h3>
+    <p>Library of functions to update the HTML Canvas element.</p>
+    <h3>conway-patterns</h3>
+    <p>Collection of definitions of specific starting patterns that result in static, oscillating and animated final
+        patterns.</p>
+    <h3>conway-brute-force</h3>
+    <p><strong>Advance</strong> function that processes each cycle by processing each cell in each row in turn.</p>
+    <h3>conway-iterated</h3>
+    <p><strong>Advance</strong> function that processes each cycle by comparing neighbouring cells of living cells using
+        an iterative approach.</p>
+    <h3>conway-recursed</h3>
+    <p><strong>Advance</strong> function that processes each cycle by comparing neighbouring cells of living cells using
+        a recursive approach.</p>
+</body>
+
+</html>

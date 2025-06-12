@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random-Boolean-Network</title>
+    <style>
+        body {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1200" height="300">
+
+    <script>
+        const maxCycles = 80;
+        let cycle = 0;
+        let nodes = [...'01234567890123456789'].map(randomValue);
+        const rules = [...'01234567'].map(randomValue);
+        const network = nodes.map(connections);
+        console.table(rules);
+        console.table(network);
+
+        const canvas = document.getElementsByTagName('canvas')[0];
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#0000FF";
+        ctx.fillRect(0, 0, 1200, 300);
+
+        do {
+            nodes.forEach(fillCell);
+            let pattern = nodes.map((_, index) => network[index]
+                .map((ref, idx) => nodes[ref] * 2 ** idx)
+                .reduce((a, b) => a + b)
+            );
+            nodes = pattern.map(idx => rules[idx]);
+        } while (cycle++ < maxCycles)
+
+        function fillCell(cellValue, cellIndex) {
+            ctx.fillStyle = cellValue ? (cycle ? "#FFFFFF" : "#FFFF00") : "#000000";
+            ctx.fillRect(1 + (cycle * 15), 1 + (cellIndex * 15), 13, 13);
+        }
+        function randomValue() {
+            return ~~(Math.random()*2) % 2;
+        }
+        function connections(_, index) {
+            return [
+                nodeConnection(index),
+                nodeConnection(index),
+                nodeConnection(index)
+            ]
+        }
+        function nodeConnection(index) {
+            return ~~((1 + Math.random() * 19 + index) % 20);
+        }
+
+        function console_table(arr, domNode = document.body) {
+            function getHeading(row) {
+                return Array.isArray(row) ? row.map((_, idx) => `<th>${idx + 1}</th>`).join('')
+                    : (typeof row === 'object') ? Object.keys(row).map(col => `<th>${col}</th>`).join('') :  `<th>Value</th>`;
+            }
+            function getData(row) {
+                const htmlData = cell => `<td>${cell}</td>`;
+                return Array.isArray(row) ? row.map(htmlData).join('')
+                    : (typeof row === 'object') ? Object.values(row).map(htmlData).join('') : htmlData(row) ;
+            }
+
+            domNode.innerHTML +=
+                arr.length ? `<table border="1">
+<tr><th>#</th>${getHeading(arr[0])}</tr>${
+    arr.map((row, idx) => `<tr><td>${idx}</td>${getData(row)}</tr>`).join('')
+}</table>` : '';
+        }
+    </script>
+</body>
+</html>

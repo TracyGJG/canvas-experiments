@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Conway's Game</title>
+</head>
+
+<body>
+    <button>Start</button>
+    <h1></h1>
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+
+    <script src="conway-patterns.js"></script>
+    <script src="conway-canvas.js"></script>
+    <!-- <script src="conway-brute-force.js"></script> -->
+    <script src="conway-iterated.js"></script>
+    <!-- <script src="conway-recursed.js"></script> -->
+    <script>
+        let cycle = 0;
+        const cycleMax = 200;
+        let patterns = gliderGuns;
+
+        function runCycle() {
+            patterns = advance(patterns);
+            if (++cycle < cycleMax) window.requestAnimationFrame(runCycle);
+            else startButton.disabled = false;
+        }
+
+        clearCanvas();
+        patterns.forEach(cell => drawCell.apply(null, cell));
+    </script>
+</body>
+
+</html>
