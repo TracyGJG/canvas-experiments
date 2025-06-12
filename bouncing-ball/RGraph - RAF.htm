@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>An example of HTML5 canvas animation</title>
+    <meta name="description" content="A guide showing you HTML5 canvas animation using the requestAnimationFrame() function " />
+
+    <script src="RGraph.common.core.js"></script>
+
+    <script>
+        UpdateCanvas = function (func)
+        {
+            window.requestAnimationFrame(func);
+        }
+
+        window.onload = function (e)
+        {
+            var canvas  = document.getElementById('cvs1');
+            var context = canvas.getContext('2d');
+
+            /**
+            * This is a simple object that is drawn on to the canvas. There's nothing special - it just an object that holds details
+            * of the shape that is drawn. The "type" member isn't used here, but if you have different types of shape you could use
+            * it so that your program knows how to draw the shape.
+            */
+            var shape = {'type':'circle', 'x':25, 'y':25, 'xdir': 1, 'ydir': 1,'radius': 30, 'fill':'blue', 'stroke':'black'}
+            var stepx = 5;
+            var stepy = 5;
+
+            function draw ()
+            {
+                // New frame - new day - clear the canvas
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                switch (shape.type) {
+                    case 'circle':
+                        context.beginPath();
+                        context.fillStyle = shape.fill;
+                        context.strokeStyle = shape.stroke;
+                        context.arc(shape.x, shape.y, shape.radius, 0, Math.PI * 2, false);
+                        context.stroke();
+                        context.fill();
+                        break;
+                }
+
+                /**
+                * X collision detection - ie if the circle hits the sides of the canvas reverse the direction
+                */
+                if (( shape.x + shape.radius + stepx >= canvas.width) || (shape.x - shape.radius + stepx <= 0)) {
+                    stepx = (5 + RGraph.random(-2, 2)) * (stepx > 0 ? -1 : 1)*shape.xdir;
+                }
+                /**
+                * Y collision detection - ie if the circle hits the sides of the canvas reverse the direction
+                */
+                if ( (shape.y + shape.radius + stepy >= canvas.height) || (shape.y - shape.radius + stepy <= 0)) {
+                    stepy = (5 + RGraph.random(-2, 2)) * (stepy > 0 ? -1 : 1)*shape.ydir;
+                }
+                shape.x += stepx;
+                shape.y += stepy;
+
+                UpdateCanvas(draw);
+            }
+
+            UpdateCanvas(draw);
+        }
+    </script>
+
+	</head>
+	<body>
+		<canvas id="cvs1" width="800" height="400" style="border: 1px solid #ccc; background-color:#CCF;">[No canvas support]</canvas>
+	</body>
+</html>

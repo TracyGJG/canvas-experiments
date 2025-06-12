@@ -1,0 +1,82 @@
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #707a;
+    margin: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2.5rem 25rem 50rem;
+    grid-template-rows: 25rem 2.5rem auto;
+    grid-template-areas: 
+        "yAxis trigCircle trigPlot"
+        "tanAngle xAxis trigAngle"
+        "dataDisplay dataDisplay dataDisplay";
+}
+
+.xAxis {
+    grid-area: xAxis;
+}
+.yAxis {
+    grid-area: yAxis;
+}
+.tangent {
+    grid-area: tanAngle;
+}
+.trigCircle {
+    grid-area: trigCircle;
+}
+.trigPlot {
+    grid-area: trigPlot;
+}
+.trigAngle {
+    grid-area: trigAngle;
+}
+.dataDisplay {
+    grid-area: dataDisplay;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+section {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+section > svg {
+    background-color: #fff;
+}
+
+#tanCircle,
+#backCircle {
+    fill: #00F3;
+    stroke-width: 2;
+    stroke: #00f;
+}
+
+#tanCircle{
+    fill: #00F1;
+}
+
+legend {
+    padding: 0 0.5rem;
+    color: #fff;
+}
+
+input {
+    width: 100%;
+}
+
+label {
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    padding: 1rem 2rem;
+    color: #FFF;
+}
+
+label > span:first-of-type {
+    display: inline-block;
+    width: 4rem;
+    font-weight: bold;
+}
+
